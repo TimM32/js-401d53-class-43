@@ -3,10 +3,14 @@ import { Button, FlatList, Linking, StyleSheet, Text, View } from 'react-native'
 import * as Contacts from 'expo-contacts';
 import { useEffect, useState } from 'react';
 
-const call = (contact) => {
-  let phoneNumber = contact.phoneNumber[0].number;
-  const link = `tel:${phoneNumber}`
 
+  const call = (contact) => {
+    let phoneNumber = contact.phoneNumber[0].number;
+    const link = `tel:${phoneNumber}`
+    
+    /* The code `Linking.canOpenURL(link)` checks if the device is capable of opening the specified URL.
+    It returns a promise that resolves to a boolean value indicating whether the URL can be opened or
+    not. */
   Linking.canOpenURL(link)
     .then(supported => Linking.openURL(link))
     .catch(error => console.error(error));
@@ -21,7 +25,7 @@ const Item = ({ item }) => (
   </View>
 );
 
-export default function App() {
+export default App = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
