@@ -1,19 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, FlatList, Linking, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, Linking, FlatList } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { useEffect, useState } from 'react';
 
-
-//   const call = (contact) => {
-//     let phoneNumber = contact.phoneNumber?.[0]?.number;
-    
-    
-//     const link = `tel:${phoneNumber}`
-    
-//     Linking.canOpenURL(link)
-//     .then(supported => Linking.openURL(link))
-//     .catch(error => console.error(error));
-// }
 
 const call = (contact) => {
   const phoneNumber = contact.phoneNumbers?.[0]?.number;
@@ -37,49 +26,59 @@ const call = (contact) => {
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
 const Item = ({ item }) => (
   <View style={styles.item}>
     <Button
       onPress={() => call(item)}
       title={item.name}
-      />
+      color="white"
+    />
   </View>
 );
 
-export default App = () => {
+
+export default function App() {
   const [contacts, setContacts] = useState([]);
 
-  
-  
   useEffect(() => {
     const getContacts = async () => {
-      try {
-        const { status } = await Contacts.requestPermissionAsync();
-        console.log('here is ->>>>>>>>>>>', status);
-        if (status === 'granted') {
-          let { data } = await Contacts.getContactsAsync();
-          console.log('My data is here', data[0].name);
-          setContacts(data);
-        }
-      } catch (error) {
-        console.error('->>>>>>>>>>>>', error);
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        let { data } = await Contacts.getContactsAsync();
+        setContacts(data)
       }
-    };
-    
+    }
     getContacts();
   }, []);
 
+
+  
+  
+  
+  
   return (
     <View style={styles.container}>
-      <Text>Contact List!</Text>
+      <Text style={styles.title}>Contacts</Text>
       <FlatList
         data={contacts}
-        renderItem={({item}) => <Item item={item} />}
+        renderItem={({ item }) => <Item item={item} />}
         keyExtractor={item => item.id} />
       <StatusBar style="auto" />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -87,22 +86,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40
+    marginTop: 65,
   },
-
   item: {
-    backgroundColor: '#410d53',
-    padding: 20,
-    marginVertical: 6,
-    marginHorizontal: 12,
+    backgroundColor: '#FF0000',
+    padding: 10,
+    width: 185,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
-
   title: {
-    color: '#fff',
-    fontSize: 34,
+    color: 'black',
+    marginBottom: 10,
+    fontSize: 35,
   },
-
 });
-
-
-

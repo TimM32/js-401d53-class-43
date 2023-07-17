@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "js-401d53-class-43",
-    "slug": "js-401d53-class-43",
+    "name": "contacts",
+    "slug": "contacts",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow $(PRODUCT_NAME) to access your contacts."
+        }
+      ]
+    ],
+    "permissions": [
+      "contacts"
+    ]
   }
 }
