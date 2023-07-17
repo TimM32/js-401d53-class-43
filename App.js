@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    backgroundColor: 'white',
+    backgroundColor: '#410d53',
     padding: 20,
     marginVertical: 6,
     marginHorizontal: 12,
   },
-  
+
   title: {
-    color: 'blue'
+    color: '#fff',
     fontSize: 34,
   },
 
