@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, Linking, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, Linking, StyleSheet, Text, View } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { useEffect, useState } from 'react';
 
@@ -22,7 +22,7 @@ const Item = ({ item }) => (
 );
 
 export default function App() {
-  const [contacts, setContacts] = useState([])
+  const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     const getContacts = async() => {
@@ -38,7 +38,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Contact List!</Text>
+      <FlatList
+        data={contacts}
+        renderItem={({item}) => <Item item={item} />}
+        keyExtractor={item => item.id} />
       <StatusBar style="auto" />
     </View>
   );
@@ -50,5 +54,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 40
   },
+
+  item: {
+    backgroundColor: 'white',
+    padding: 20,
+    marginVertical: 6,
+    marginHorizontal: 12,
+  },
+  
+  title: {
+    color: 'blue'
+    fontSize: 34,
+  },
+
 });
