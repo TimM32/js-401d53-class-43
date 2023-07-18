@@ -54,7 +54,7 @@ export default App = () => {
   useEffect(() => {
     const getContacts = async () => {
       try {
-        const { status } = await Contacts.requestPermissionAsync();
+        const { status } = await Contacts.requestPermissionsAsync();
         console.log('here is ->>>>>>>>>>>', status);
         if (status === 'granted') {
           let { data } = await Contacts.getContactsAsync();
